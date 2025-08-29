@@ -1,10 +1,10 @@
 import MenuDrower from "../components/menuDrower"
 import Navbar from "../components/navbar"
 
-const Products = () => {
+const Others = () => {
     return (<>
         <div>
-            <Navbar/>
+            <Navbar />
             <div className="flex">
                 <div>
                     <MenuDrower />
@@ -14,4 +14,4 @@ const Products = () => {
     </>)
 }
 
-export default Products
+export default Others

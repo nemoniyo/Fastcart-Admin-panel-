@@ -17,7 +17,7 @@ const Navbar = () => {
                         <input type="text" placeholder="Search..." className="placeholder:text-[whitesmoke] placeholder:text-[18px] outline-none" />
                     </div>
                     <div className="flex items-center gap-[18px]">
-                        <div className="w-[45px] h-[40px] rounded-[50%] bg-[whitesmoke] flex items-center justify-center mr-[5px]">
+                        <div className="w-[45px] h-[40px] rounded-[50%] flex items-center justify-center mr-[5px]">
                             <button onClick={toggleTheme} className="m-[5px]">
                                 <ThemeToggle />
                             </button>

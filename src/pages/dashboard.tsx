@@ -140,7 +140,10 @@ const Dashboard = () => {
                         </div>
                     </div>
                     <div>
-                        
+                        <div></div>
+                        <div className="border-[2px] border-gray-300 w-[500px]">
+                            
+                        </div>
                     </div>
                 </div>
             </div>

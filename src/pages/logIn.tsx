@@ -56,6 +56,7 @@ const LogIn = () => {
             navigate("/login");
         }
     }, [navigate]);
+
     return (<>
         <div>
             <div className='flex'>
