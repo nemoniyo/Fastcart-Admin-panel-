@@ -17,9 +17,11 @@ const Navbar = () => {
                         <input type="text" placeholder="Search..." className="placeholder:text-[whitesmoke] placeholder:text-[18px] outline-none" />
                     </div>
                     <div className="flex items-center gap-[18px]">
-                        <button onClick={toggleTheme} className="mr-[5px]">
-                            <ThemeToggle />
-                        </button>
+                        <div className="w-[45px] h-[40px] rounded-[50%] bg-[whitesmoke] flex items-center justify-center mr-[5px]">
+                            <button onClick={toggleTheme} className="m-[5px]">
+                                <ThemeToggle />
+                            </button>
+                        </div>
                         <img src={profImage} alt="profImage" className="h-[64px] w-[64px]" />
                         <p className="text-[18px] font-[500] text-[whitesmoke]">Admin Adminovich</p>
                         <button>
