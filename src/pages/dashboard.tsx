@@ -21,21 +21,21 @@ const Dashboard = () => {
                     <div className="flex gap-[50px]">
                         <div>
                             <div className="flex gap-[40px] mt-[40px]">
-                                <div className="w-[250px] h-[100px] rounded-[4px] flex justify-center items-center gap-[20px] bg-[#FEF3F2]">
+                                <div className="w-[250px] h-[100px] rounded-[4px] flex justify-center items-center gap-[20px] bg-[#FEF3F2] hover:shadow-lg transition-all duration-500">
                                     <img src={sales} alt="sales" className="w-[75px] h-[75px]" />
                                     <div>
                                         <p className="text-[18px] font-[400] text-[gray]">Sales</p>
                                         <h1 className="text-[32px] font-[700] text-[black]">$152k</h1>
                                     </div>
                                 </div>
-                                <div className="w-[250px] h-[100px] rounded-[4px] flex justify-center items-center gap-[20px] bg-[#FFFAEB]">
+                                <div className="w-[250px] h-[100px] rounded-[4px] flex justify-center items-center gap-[20px] bg-[#FFFAEB] hover:shadow-lg transition-all duration-500">
                                     <img src={cost} alt="cost" className="w-[75px] h-[75px]" />
                                     <div>
                                         <p className="text-[18px] font-[400] text-[gray]">Cost</p>
                                         <h1 className="text-[32px] font-[700] text-[black]">$99.7k</h1>
                                     </div>
                                 </div>
-                                <div className="w-[250px] h-[100px] rounded-[4px] flex justify-center items-center gap-[20px] bg-[#F0FDF9]">
+                                <div className="w-[250px] h-[100px] rounded-[4px] flex justify-center items-center gap-[20px] bg-[#F0FDF9] hover:shadow-lg transition-all duration-500">
                                     <img src={profit} alt="profit" className="w-[75px] h-[75px]" />
                                     <div>
                                         <p className="text-[18px] font-[400] text-[gray]">Profit</p>
@@ -43,7 +43,7 @@ const Dashboard = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className=" border-[2px] border-gray-200 rounded-[4px] mt-[30px] pt-[20px]">
+                            <div className=" border-[2px] border-gray-200 rounded-[4px] mt-[30px] pt-[20px] shadow-lg transition-all duration-500">
                                 <div className="px-[23px]">
                                     <h1 className="text-[24px] font-[600]">Sales Revenue</h1>
                                 </div>
@@ -140,8 +140,68 @@ const Dashboard = () => {
                         </div>
                     </div>
                     <div>
-                        <div></div>
-                        <div className="border-[2px] border-gray-300 w-[500px]">
+                        <div className="border-[2px] border-gray-200 rounded-[4px] w-[700px] p-[20px] mt-[50px] shadow-lg">
+                            <h1 className="text-[24px] font-[600] mb-[15px]">Recent Transactions</h1>
+                            <div className="border-b-[3px] border-gray-200 mb-[15px]">
+                                <ul className="text-[22px] text-gray-400 flex justify-around mb-[10px]">
+                                    <li>Name</li>
+                                    <li>Date</li>
+                                    <li>Amount</li>
+                                    <li>Status</li>
+                                </ul>
+                            </div>
+                            <div className="flex flex-col gap-[20px]">
+                                <div className="flex justify-around">
+                                    <p className="text-[22px] font-[500]">Jagarnath S.</p>
+                                    <p className="text-[22px] font-[400]">24.05.2023</p>
+                                    <p className="text-[22px] font-[400]">$124.97</p>
+                                    <div className="w-[100px] h-[40px] bg-[#C4F8E2] flex justify-center items-center rounded-[4px]">
+                                        <p className="text-[16px] text-[#06A561]">Paid</p>
+                                    </div>
+                                </div>
+                                <div className="flex justify-around">
+                                    <p className="text-[22px] font-[500]">Anand G.</p>
+                                    <p className="text-[22px] font-[400]">23.05.2023</p>
+                                    <p className="text-[22px] font-[400]">$55.42</p>
+                                    <div className="w-[100px] h-[40px] bg-[#E6E9F4] flex justify-center items-center rounded-[4px]">
+                                        <p className="text-[16px] text-[#5A607F]">Pending</p>
+                                    </div>
+                                </div>
+                                <div className="flex justify-around">
+                                    <p className="text-[22px] font-[500]">Kartik S.</p>
+                                    <p className="text-[22px] font-[400]">23.05.2023</p>
+                                    <p className="text-[22px] font-[400]">$89.90</p>
+                                    <div className="w-[100px] h-[40px] bg-[#C4F8E2] flex justify-center items-center rounded-[4px]">
+                                        <p className="text-[16px] text-[#06A561]">Paid</p>
+                                    </div>
+                                </div>
+                                <div className="flex justify-around">
+                                    <p className="text-[22px] font-[500]">Rakesh S.</p>
+                                    <p className="text-[22px] font-[400]">22.05.2023</p>
+                                    <p className="text-[22px] font-[400]">$144.94</p>
+                                    <div className="w-[100px] h-[40px] bg-[#E6E9F4] flex justify-center items-center rounded-[4px]">
+                                        <p className="text-[16px] text-[#5A607F]">Pending</p>
+                                    </div>
+                                </div>
+                                <div className="flex justify-around">
+                                    <p className="text-[22px] font-[500]">Anup S.</p>
+                                    <p className="text-[22px] font-[400]">22.05.2023</p>
+                                    <p className="text-[22px] font-[400]">$70.52</p>
+                                    <div className="w-[100px] h-[40px] bg-[#C4F8E2] flex justify-center items-center rounded-[4px]">
+                                        <p className="text-[16px] text-[#06A561]">Paid</p>
+                                    </div>
+                                </div>
+                                <div className="flex justify-around">
+                                    <p className="text-[22px] font-[500]">Jimmy P.</p>
+                                    <p className="text-[22px] font-[400]">22.05.2023</p>
+                                    <p className="text-[22px] font-[400]">$70.52</p>
+                                    <div className="w-[100px] h-[40px] bg-[#C4F8E2] flex justify-center items-center rounded-[4px]">
+                                        <p className="text-[16px] text-[#06A561]">Paid</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
                             
                         </div>
                     </div>
