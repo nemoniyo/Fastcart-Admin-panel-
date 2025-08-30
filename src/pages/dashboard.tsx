@@ -6,6 +6,7 @@ import profit from "../assets/images/profit.image.png";
 import SalesRevenueChart from "../components/salesRevenue";
 import { ArrowRight } from 'lucide-react';
 import oil from "../assets/images/olive.oil.png";
+import image from "../assets/images/Image.png";
 const Dashboard = () => {
     return (<>
         <div>
@@ -52,7 +53,7 @@ const Dashboard = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="border-[2px] border-gray-200 rounded-[4px] p-[20px]">
+                        <div className="border-[2px] border-gray-200 rounded-[4px] p-[20px] shadow-lg">
                             <div className="flex gap-[170px] mb-[10px] pl-[25px]">
                                 <h1 className="text-[28px] font-[600]">Top selling products</h1>
                                 <button className="text-[24px] font-[600] flex gap-[10px] justify-center items-center hover:underline">
@@ -139,7 +140,7 @@ const Dashboard = () => {
                             </div>
                         </div>
                     </div>
-                    <div>
+                    <div className="flex gap-[110px]">
                         <div className="border-[2px] border-gray-200 rounded-[4px] w-[700px] p-[20px] mt-[50px] shadow-lg">
                             <h1 className="text-[24px] font-[600] mb-[15px]">Recent Transactions</h1>
                             <div className="border-b-[3px] border-gray-200 mb-[15px]">
@@ -201,8 +202,57 @@ const Dashboard = () => {
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            
+                        <div className="w-[700px] border-[2px] border-gray-200 rounded-[4px]  p-[20px] mt-[50px] shadow-lg">
+                            <h1 className="text-[24px] font-[600] mb-[15px]">Top Products by Units Sold</h1>
+                            <div className="border-b-[3px] border-gray-200 mb-[15px]">
+                                <ul className="text-[22px] text-gray-400 flex justify-around mb-[5px]">
+                                    <li>Name</li>
+                                    <li>Price</li>
+                                    <li>Units</li>
+                                </ul>
+                            </div>
+                            <div className="flex flex-col">
+                                <div className="flex items-center justify-around hover:bg-[#1C2536] transition-all duration-500 hover:text-[whitesmoke] dark:hover:bg-[whitesmoke] dark:hover:text-[black] p-[10px] rounded-[4px]">
+                                    <div className="flex gap-[20px] items-center">
+                                        <img src={image} alt="image" className="w-[60px] h-[60px]" />
+                                        <p className="text-[22px] font-[500]">Men Grey Hoodie</p>
+                                    </div>
+                                    <p className="text-[22px] font-[400]">$49.90</p>
+                                    <p className="text-[22px] font-[400]">204</p>
+                                </div>
+                                <div className="flex items-center justify-around hover:bg-[#1C2536] transition-all duration-500 hover:text-[whitesmoke] dark:hover:bg-[whitesmoke] dark:hover:text-[black] p-[10px] rounded-[4px]">
+                                    <div className="flex gap-[20px] items-center">
+                                        <img src={image} alt="image" className="w-[60px] h-[60px]" />
+                                        <p className="text-[22px] font-[500]">Men Grey Hoodie</p>
+                                    </div>
+                                    <p className="text-[22px] font-[400]">$49.90</p>
+                                    <p className="text-[22px] font-[400]">204</p>
+                                </div>
+                                <div className="flex items-center justify-around hover:bg-[#1C2536] transition-all duration-500 hover:text-[whitesmoke] dark:hover:bg-[whitesmoke] dark:hover:text-[black] p-[10px] rounded-[4px]">
+                                    <div className="flex gap-[20px] items-center">
+                                        <img src={image} alt="image" className="w-[60px] h-[60px]" />
+                                        <p className="text-[22px] font-[500]">Men Grey Hoodie</p>
+                                    </div>
+                                    <p className="text-[22px] font-[400]">$49.90</p>
+                                    <p className="text-[22px] font-[400]">204</p>
+                                </div>
+                                <div className="flex items-center justify-around hover:bg-[#1C2536] transition-all duration-500 hover:text-[whitesmoke] dark:hover:bg-[whitesmoke] dark:hover:text-[black] p-[10px] rounded-[4px]">
+                                    <div className="flex gap-[20px] items-center">
+                                        <img src={image} alt="image" className="w-[60px] h-[60px]" />
+                                        <p className="text-[22px] font-[500]">Men Grey Hoodie</p>
+                                    </div>
+                                    <p className="text-[22px] font-[400]">$49.90</p>
+                                    <p className="text-[22px] font-[400]">204</p>
+                                </div>
+                                <div className="flex items-center justify-around hover:bg-[#1C2536] transition-all duration-500 hover:text-[whitesmoke] dark:hover:bg-[whitesmoke] dark:hover:text-[black] p-[10px] rounded-[4px]">
+                                    <div className="flex gap-[20px] items-center">
+                                        <img src={image} alt="image" className="w-[60px] h-[60px]" />
+                                        <p className="text-[22px] font-[500]">Men Grey Hoodie</p>
+                                    </div>
+                                    <p className="text-[22px] font-[400]">$49.90</p>
+                                    <p className="text-[22px] font-[400]">204</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
