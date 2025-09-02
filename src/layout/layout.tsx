@@ -14,7 +14,7 @@ const Layout = () => {
         try {
             const decoded: any = jwtDecode(token);
             const role = decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-            if (role !== "Admin" && decoded.exp < new Date().getDate()) {
+            if (role.includes("Admin") && "SuperAdmin" && decoded.exp < new Date().getDate()) {
                 navigate("/login");
             }
         } catch (err) {
@@ -22,7 +22,7 @@ const Layout = () => {
         }
     }, []);
     return (
-        <div>
+        <div className=''>
             <ul>
                 <li>
                     <Link to={"/"}></Link>

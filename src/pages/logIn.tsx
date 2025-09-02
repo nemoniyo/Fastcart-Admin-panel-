@@ -15,7 +15,7 @@ const LogIn = () => {
             try {
                 const decodedToken = jwtDecode(token);
                 const role = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-                if (role === "Admin") {
+                if (role.includes("Admin") || "SuperAdmin") {
                     localStorage.setItem("accessToken", token);
                     navigate("/dashboard");
                 } else {
@@ -46,7 +46,7 @@ const LogIn = () => {
         try {
             const decodedToken = jwtDecode(token);
             const role = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-            if (role === "Admin") {
+            if (role.includes("Admin") || "SuperAdmin") {
                 navigate("/dashboard");
             } else {
                 navigate("/login");
