@@ -19,7 +19,7 @@ export const todo = createApi({
             providesTags: ["todo"]
         }),
         getProducts: build.query({
-            query: () => `Product/get-products`,
+            query: () => `Product/get-products?PageNumber=1&PageSize=110`,
             providesTags: ["todo"]
         }),
         deleteData: build.mutation({

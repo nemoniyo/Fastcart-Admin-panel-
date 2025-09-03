@@ -78,7 +78,7 @@ const Orders = () => {
                                         </button>
                                     ))}
                                 </div>
-                                <button className="text-[red]" onClick={() => handleDelete(user.userId)}>
+                                <button className="text-[crimson]" onClick={() => handleDelete(user.userId)}>
                                     <Trash />
                                 </button>
                             </div>
