@@ -15,7 +15,7 @@ export const todo = createApi({
     }),
     endpoints: (build) => ({
         getData: build.query({
-            query: () => `UserProfile/get-user-profiles?PageNumber=3&PageSize=50`,
+            query: () => `UserProfile/get-user-profiles?PageNumber=1&PageSize=50`,
             providesTags: ["todo"]
         }),
         getProducts: build.query({
