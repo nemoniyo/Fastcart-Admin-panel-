@@ -3,6 +3,7 @@ import MenuDrower from "../components/menuDrower"
 import Navbar from "../components/navbar"
 import { useDeleteCategoryesMutation, useEditCategoryesMutation, useGetCategoryesQuery } from "../reducers/todoslice"
 import { useState } from "react"
+import { Link } from "react-router-dom"
 
 const Others = () => {
     const { data } = useGetCategoryesQuery();
@@ -10,8 +11,8 @@ const Others = () => {
     const [editCategoryes] = useEditCategoryesMutation();
     const [editCategoryesModal, setEditCategoryesModal] = useState(false);
     const [editName, setEditName] = useState("");
-    const [editImage, setEditImage] = useState("");
     const [idx, setIdx] = useState(null);
+    const [editImage, setEditImage] = useState("");
     const [search, setSearch] = useState("");
 
 
@@ -48,8 +49,12 @@ const Others = () => {
                 <div className="p-[25px]">
                     <div className="flex gap-[30px] text-[20px] font-[500]">
                         <button className="rounded bg-[#DBEAFE] text-[#416BDF] p-[10px]">Categories</button>
-                        <button className="hover:rounded hover:bg-[#DBEAFE] hover:text-[#416BDF] transition-all duration-500 p-[10px]">Brands</button>
-                        <button className="hover:rounded hover:bg-[#DBEAFE] hover:text-[#416BDF] transition-all duration-500 p-[10px]">Banners</button>
+                        <Link to={"/others/brands"}>
+                            <button className="hover:rounded hover:bg-[#DBEAFE] hover:text-[#416BDF] transition-all duration-500 p-[10px]">Brands</button>
+                        </Link>
+                        <Link to={"/others/banners"}>
+                            <button className="hover:rounded hover:bg-[#DBEAFE] hover:text-[#416BDF] transition-all duration-500 p-[10px]">Banners</button>
+                        </Link>
                     </div>
                     <div className="w-[300px] h-[60px] border-[2px] border-gray-300 rounded flex items-center p-[20px] gap-[50px] my-[35px]">
                         <input type="text" className="outline-none placeholder:text-xl w-full" placeholder="Search..." value={search} onChange={(e) => setSearch(e.target.value)} />

@@ -26,9 +26,20 @@ export const todo = createApi({
             query: () => `Category/get-categories`,
             providesTags: ["todo"]
         }),
+        getBrands: build.query({
+            query: () => `Brand/get-brands`,
+            providesTags: ["todo"]
+        }),
         deleteData: build.mutation({
             query: (id) => ({
                 url: `UserProfile/delete-user?id=${id}`,
+                method: "DELETE"
+            }),
+            invalidatesTags: ["todo"]
+        }),
+        deleteBrands: build.mutation({
+            query: (id) => ({
+                url: `Brand/delete-brand?id=${id}`,
                 method: "DELETE"
             }),
             invalidatesTags: ["todo"]
@@ -69,7 +80,15 @@ export const todo = createApi({
             }),
             invalidatesTags: ["todo"],
         }),
+        editBrands: build.mutation({
+            query: (obj) => ({
+                url: `Brand/update-brand`,
+                method: 'PUT',
+                body: obj,
+            }),
+            invalidatesTags: ["todo"],
+        }),
     }),
 })
 
-export const { useGetDataQuery, useDeleteDataMutation, useGetProductsQuery, useDeleteProductMutation, useRoleUserMutation, useRoleDeleteMutation, useGetCategoryesQuery, useDeleteCategoryesMutation, useEditCategoryesMutation } = todo;
+export const { useGetDataQuery, useDeleteDataMutation, useGetProductsQuery, useDeleteProductMutation, useRoleUserMutation, useRoleDeleteMutation, useGetCategoryesQuery, useDeleteCategoryesMutation, useEditCategoryesMutation, useGetBrandsQuery, useDeleteBrandsMutation, useEditBrandsMutation } = todo;

@@ -5,6 +5,8 @@ import Dashboard from './pages/dashboard';
 import Orders from './pages/orders';
 import Products from './pages/products';
 import Others from './pages/others';
+import Brands from './pages/brands';
+import Banners from './pages/banners';
 
 export default function App() {
   const router = createBrowserRouter([
@@ -31,6 +33,14 @@ export default function App() {
         {
           path: "/others",
           element: <Others />
+        },
+        {
+          path: "/others/brands",
+          element: <Brands />
+        },
+        {
+          path: "/others/banners",
+          element: <Banners />
         },
       ]
     }
