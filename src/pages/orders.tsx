@@ -60,12 +60,12 @@ const Orders = () => {
                     </div>
                 </div>
                 <div className="w-[1620px] overflow-scroll h-[900px]">
-                    {filteredUsers?.map((user) => (
+                    {filteredUsers?.map((user: any) => (
                         <div key={user.userId} className="flex justify-between border-b-[2px] border-gray-300 p-[20px] text-start">
                             <h1 className="w-[20%]">{user.userName}</h1>
                             <p className="w-[20%]">{user.userId.slice(0, 5)}</p>
                             <div>
-                                {user.userRoles.map((role) => (
+                                {user.userRoles.map((role: any) => (
                                     <p key={role.id} className="w-[20%]">{role.name}</p>
                                 ))}
                             </div>
@@ -73,7 +73,7 @@ const Orders = () => {
                             <div className="flex gap-[20px] items-center">
                                 <div className="flex flex-col gap-[3px]">
                                     {user.userRoles?.map((el) => (
-                                        <button onClick={() => toggleRole({ userId: user.userId, currentRoleId: el.id })} key={el.name} className='px-2 py-1  w-[100px] font-[18px] bg-[cornflowerblue] dark:bg-[whitesmoke] dark:text-[vlack] transition-all duration-500 text-[whitesmoke] rounded'>
+                                        <button onClick={() => toggleRole({ userId: user.userId, currentRoleId: el.id })} key={el.name} className='px-2 py-1  w-[100px] font-[18px] bg-[cornflowerblue] dark:text-[black] dark:bg-[whitesmoke] transition-all duration-500 text-[whitesmoke] rounded'>
                                             {el.name}
                                         </button>
                                     ))}
