@@ -22,9 +22,20 @@ export const todo = createApi({
             query: () => `Product/get-products?PageNumber=1&PageSize=110`,
             providesTags: ["todo"]
         }),
+        getCategoryes: build.query({
+            query: () => `Category/get-categories`,
+            providesTags: ["todo"]
+        }),
         deleteData: build.mutation({
             query: (id) => ({
                 url: `UserProfile/delete-user?id=${id}`,
+                method: "DELETE"
+            }),
+            invalidatesTags: ["todo"]
+        }),
+        deleteCategoryes: build.mutation({
+            query: (id) => ({
+                url: `Category/delete-category?id=${id}`,
                 method: "DELETE"
             }),
             invalidatesTags: ["todo"]
@@ -49,8 +60,16 @@ export const todo = createApi({
                 method: 'DELETE',
             }),
             invalidatesTags: ["todo"],
-        })
+        }),
+        editCategoryes: build.mutation({
+            query: (obj) => ({
+                url: `Category/update-category`,
+                method: 'PUT',
+                body: obj,
+            }),
+            invalidatesTags: ["todo"],
+        }),
     }),
 })
 
-export const { useGetDataQuery, useDeleteDataMutation, useGetProductsQuery, useDeleteProductMutation, useRoleUserMutation, useRoleDeleteMutation } = todo;
+export const { useGetDataQuery, useDeleteDataMutation, useGetProductsQuery, useDeleteProductMutation, useRoleUserMutation, useRoleDeleteMutation, useGetCategoryesQuery, useDeleteCategoryesMutation, useEditCategoryesMutation } = todo;

@@ -38,7 +38,7 @@ const Products = () => {
                         <button className="w-[120px] h-[50px] bg-[#2563EB] hover:opacity-70 transition-all duration-500 text-[whitesmoke] rounded-[4px] absolute left-[1480px]">+  Add order</button>
                     </div>
                     <div className="w-[300px] h-[60px] border-[2px] border-gray-300 rounded flex items-center p-[20px] gap-[50px] my-[35px]">
-                        <input type="text" className="outline-none placeholder:text-xl w-full" placeholder="Search..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
+                        <input type="text" className="outline-none placeholder:text-xl w-full" placeholder="Search..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
                         <div className="text-gray-300">
                             <Search />
                         </div>
