@@ -7,7 +7,7 @@ const MenuDrower = () => {
 
     return (
         <div className="flex">
-            <div className="px-[25px] pt-[40px] w-[350px] h-[145vh] dark:bg-[#1C2536] bg-[#1C2536] text-[whitesmoke]">
+            <div className="px-[25px] pt-[40px] w-[350px] h-[145vh] dark:bg-[#1C2536] bg-[#1C2536] text-[whitesmoke] dark:border-r-[2px] dark:border-gray-300">
                 <NavLink
                     to="/dashboard"
                     className={({ isActive }) =>

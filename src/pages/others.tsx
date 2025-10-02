@@ -1,26 +1,37 @@
 import { Edit, Search, Trash } from "lucide-react"
 import MenuDrower from "../components/menuDrower"
 import Navbar from "../components/navbar"
-import { useDeleteCategoryesMutation, useEditCategoryesMutation, useGetCategoryesQuery } from "../reducers/todoslice"
+import { useDeleteCategoryesMutation, useEditCategoryesMutation, useGetCategoryesQuery, useAddCategoryesMutation } from "../reducers/todoslice"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Tooltip } from "antd";
 
 const Others = () => {
     const { data } = useGetCategoryesQuery();
     const [deleteCategoryes] = useDeleteCategoryesMutation();
     const [editCategoryes] = useEditCategoryesMutation();
+    const [addCategoryes] = useAddCategoryesMutation();
+
     const [editCategoryesModal, setEditCategoryesModal] = useState(false);
     const [editName, setEditName] = useState("");
     const [idx, setIdx] = useState<any>(null);
-    const [editImage, setEditImage] = useState("");
-    const [search, setSearch] = useState("");
+    const [editImage, setEditImage] = useState<File | null>(null);
+    const [previewEdit, setPreviewEdit] = useState<string | null>(null);
 
+    const [addCategoryesModal, setAddCategoryesModal] = useState(false);
+    const [addName, setAddName] = useState("");
+    const [addImage, setAddImage] = useState<File | null>(null);
+    const [previewAdd, setPreviewAdd] = useState<string | null>(null);
+
+    const [search, setSearch] = useState("");
 
     function showEdit(e: any) {
         setIdx(e.id);
         setEditName(e.categoryName);
+        setEditImage(null);
+        setPreviewEdit(null);
         setEditCategoryesModal(true);
     };
 
@@ -28,10 +39,11 @@ const Others = () => {
         e.preventDefault();
         let formData = new FormData();
         formData.append("Id", idx);
+        formData.append("CategoryName", editName);
+
         if (editImage) {
-            formData.append("CategoryImage", e.target["categoryImage"].files[0]);
+            formData.append("CategoryImage", editImage);
         }
-        formData.append("CategoryName", e.target["categoryName"].value);
 
         try {
             await editCategoryes(formData).unwrap();
@@ -48,6 +60,27 @@ const Others = () => {
             toast.success("Category deleted successfully!");
         } catch {
             toast.error("Failed to delete category!");
+        }
+    }
+
+    // add category
+    async function handleAdd(e: any) {
+        e.preventDefault();
+        let formData = new FormData();
+        formData.append("CategoryName", addName);
+        if (addImage) {
+            formData.append("CategoryImage", addImage);
+        }
+
+        try {
+            await addCategoryes(formData).unwrap();
+            toast.success("Category added successfully!");
+            setAddCategoryesModal(false);
+            setAddName("");
+            setAddImage(null);
+            setPreviewAdd(null);
+        } catch {
+            toast.error("Failed to add category!");
         }
     }
 
@@ -71,14 +104,21 @@ const Others = () => {
                                 <button className="hover:rounded hover:bg-[#DBEAFE] hover:text-[#416BDF] transition-all duration-500 p-[10px]">Subcategorys</button>
                             </Link>
                         </div>
-                        <button className="w-[160px] h-[55px] bg-[#2563EB] hover:opacity-70 transition-all duration-500 text-[whitesmoke] text-[18px] font-[600] rounded-[4px] hover:rounded-[15px] absolute left-[1480px]">+  Add category</button>
+                        <button
+                            onClick={() => setAddCategoryesModal(true)}
+                            className="w-[160px] h-[55px] bg-[#2563EB] hover:opacity-70 transition-all duration-500 text-[whitesmoke] text-[18px] font-[600] rounded-[4px] hover:rounded-[15px] absolute left-[1660px]"
+                        >
+                            + Add category
+                        </button>
                     </div>
+
                     <div className="w-[300px] h-[60px] border-[2px] border-gray-300 rounded flex items-center p-[20px] gap-[50px] my-[35px]">
                         <input type="text" className="outline-none placeholder:text-xl w-full" placeholder="Search..." value={search} onChange={(e) => setSearch(e.target.value)} />
                         <div className="text-gray-300">
                             <Search />
                         </div>
                     </div>
+
                     <div className="flex gap-[50px] flex-wrap">
                         {filteredData?.map((element: any) => {
                             return (
@@ -88,24 +128,76 @@ const Others = () => {
                                         <p className="text-[20px] font-[500]">{element.categoryName}</p>
                                     </div>
                                     <div className="flex gap-[10px] absolute top-[20px] left-[170px]">
-                                        <button onClick={() => handleDelete(element.id)} className="text-[crimson]">
-                                            <Trash />
-                                        </button>
-                                        <button onClick={() => showEdit(element)} className="text-[cornflowerblue]">
-                                            <Edit />
-                                        </button>
+                                        <Tooltip title="Edit category">
+                                            <button onClick={() => showEdit(element)} className="text-[cornflowerblue]">
+                                                <Edit />
+                                            </button>
+                                        </Tooltip>
+                                        <Tooltip title="Delete category?">
+                                            <button onClick={() => handleDelete(element.id)} className="text-[crimson]">
+                                                <Trash className="hover:size-8 transition-all duration-500" />
+                                            </button>
+                                        </Tooltip>
                                     </div>
                                 </div>
                             )
                         })}
+
                         {editCategoryesModal && (
                             <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex justify-center items-center z-50">
                                 <form onSubmit={handleEdit} className="bg-white p-6 rounded-lg w-full max-w-md shadow-md space-y-4">
-                                    <input type="file" name="categoryImage" onChange={(e) => setEditImage(e.target.value)} />
-                                    <input type="text" name="categoryName" value={editName} onChange={(e) => setEditName(e.target.value)} className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                                    {previewEdit && (
+                                        <img src={previewEdit} alt="preview" className="w-[100px] h-[100px] object-cover mx-auto" />
+                                    )}
+                                    <input
+                                        type="file"
+                                        name="categoryImage"
+                                        onChange={(e) => {
+                                            const file = e.target.files ? e.target.files[0] : null;
+                                            setEditImage(file);
+                                            if (file) setPreviewEdit(URL.createObjectURL(file));
+                                        }}
+                                    />
+                                    <input
+                                        type="text"
+                                        name="categoryName"
+                                        value={editName}
+                                        onChange={(e) => setEditName(e.target.value)}
+                                        className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                    />
                                     <div className="flex gap-2 pt-2">
                                         <button type="button" className="w-1/2 bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 rounded" onClick={() => setEditCategoryesModal(false)}>Cancel</button>
                                         <button type="submit" className="w-1/2 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        )}
+
+                        {addCategoryesModal && (
+                            <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex justify-center items-center z-50">
+                                <form onSubmit={handleAdd} className="bg-white p-6 rounded-lg w-full max-w-md shadow-md space-y-4">
+                                    {previewAdd && (
+                                        <img src={previewAdd} alt="preview" className="w-[100px] h-[100px] object-cover mx-auto" />
+                                    )}
+                                    <input
+                                        type="file"
+                                        name="categoryImage"
+                                        onChange={(e) => {
+                                            const file = e.target.files ? e.target.files[0] : null;
+                                            setAddImage(file);
+                                            if (file) setPreviewAdd(URL.createObjectURL(file));
+                                        }}
+                                    />
+                                    <input
+                                        type="text"
+                                        name="categoryName"
+                                        value={addName}
+                                        onChange={(e) => setAddName(e.target.value)}
+                                        className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                    />
+                                    <div className="flex gap-2 pt-2">
+                                        <button type="button" className="w-1/2 bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 rounded" onClick={() => setAddCategoryesModal(false)}>Cancel</button>
+                                        <button type="submit" className="w-1/2 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded">Add</button>
                                     </div>
                                 </form>
                             </div>
@@ -118,4 +210,4 @@ const Others = () => {
     </>)
 }
 
-export default Others 
+export default Others;

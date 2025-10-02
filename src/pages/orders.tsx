@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useGetDataQuery, useDeleteDataMutation, useRoleUserMutation, useRoleDeleteMutation } from "../reducers/todoslice";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { Tooltip } from "antd";
 
 const Orders = () => {
     const { data } = useGetDataQuery();
@@ -72,14 +72,18 @@ const Orders = () => {
                             <div className="flex gap-[20px] items-center">
                                 <div className="flex flex-col gap-[3px]">
                                     {user.userRoles?.map((el) => (
-                                        <button onClick={() => toggleRole({ userId: user.userId, currentRoleId: el.id })} key={el.name} className='px-2 py-1  w-[100px] font-[18px] bg-[cornflowerblue] dark:text-[black] dark:bg-[whitesmoke] transition-all duration-500 text-[whitesmoke] rounded'>
-                                            {el.name}
-                                        </button>
+                                        <Tooltip title="Change role user">
+                                            <button onClick={() => toggleRole({ userId: user.userId, currentRoleId: el.id })} key={el.name} className='px-2 py-1  w-[100px] font-[18px] bg-blue-500 hover:bg-blue-600 dark:text-[black] dark:bg-[whitesmoke] transition-all duration-500 text-[whitesmoke] rounded'>
+                                                {el.name}
+                                            </button>
+                                        </Tooltip>
                                     ))}
                                 </div>
-                                <button className="text-[crimson]" onClick={() => handleDelete(user.userId)}>
-                                    <Trash />
-                                </button>
+                                <Tooltip title="Delete user?">
+                                    <button className="text-[crimson]" onClick={() => handleDelete(user.userId)}>
+                                        <Trash className="hover:size-8 transition-all duration-500" />
+                                    </button>
+                                </Tooltip>
                             </div>
                         </div>
                     ))}

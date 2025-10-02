@@ -11,7 +11,7 @@ const Navbar = () => {
     const [logOut, setLogOut] = useState(false)
     return (<>
         <nav>
-            <div className="flex bg-[#1C2536] text-[whitesmoke] py-[15px] px-[50px]">
+            <div className="flex bg-[#1C2536] text-[whitesmoke] py-[15px] px-[50px] dark:border-b-[2px] dark:border-gray-300">
                 <div>
                     <img src={fastcartLogo} alt="fastcartLogo" className="w-[240px] h-[68px]" />
                 </div>

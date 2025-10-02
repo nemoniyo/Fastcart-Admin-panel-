@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import { useDeleteProductMutation, useGetProductsQuery } from "../reducers/todoslice"
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Tooltip } from "antd";
 
 const Products = () => {
     const { data, error, isLoading } = useGetProductsQuery();
@@ -49,12 +50,16 @@ const Products = () => {
                                 <p className="w-[15%]">{element.categoryName}</p>
                                 <p className="w-[15%]">{element.price}</p>
                                 <div className="flex gap-[20px]">
+                                    <Tooltip title="Edit product">
                                     <button className="text-[cornflowerblue]">
                                         <Edit />
                                     </button>
-                                    <button onClick={() => deleteProduct(element.id)} className="text-[crimson]">
-                                        <Trash />
-                                    </button>
+                                </Tooltip>
+                                    <Tooltip title="Delete product?">
+                                        <button onClick={() => deleteProduct(element.id)} className="text-[crimson]">
+                                            <Trash className="hover:size-8 transition-all duration-500" />
+                                        </button>
+                                    </Tooltip>
                                 </div>
                             </div>
                         )}
