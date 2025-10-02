@@ -28,15 +28,15 @@ const Orders = () => {
         user.userName.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    function toggleRole({ userId, currentRoleId }) {
-        const adminRole = '34808f49-52e9-4fb7-9001-cf05800d608d'
-        const userRole = '82f1e62b-03ca-4d0e-a61a-e5398d8a67e1'
+    async function toggleRole({ userId, currentRoleId }) {
+        const adminRole = '5934caf4-3e67-4b36-8296-aae189edfd90'
+        const userRole = '69d160a0-343c-471e-bd07-06e42dfd978d'
         if (currentRoleId == adminRole) {
-            roleUser({ id1: userId, id2: userRole })
             roleDelete({ id1: userId, id2: adminRole })
+            await roleUser({ id1: userId, id2: userRole })
         } else {
-            roleUser({ id1: userId, id2: adminRole })
             roleDelete({ id1: userId, id2: userRole })
+            await roleUser({ id1: userId, id2: adminRole })
         }
     }
 
@@ -50,8 +50,7 @@ const Orders = () => {
             </div>
             <div className="p-[25px]">
                 <div className="flex items-center relative">
-                    <h1 className="text-[32px] font-[600]">Orders</h1>
-                    <button className="w-[120px] h-[50px] bg-[#2563EB] hover:opacity-70 transition-all duration-500 text-[whitesmoke] rounded-[4px] absolute left-[1480px]">+  Add order</button>
+                    <h1 className="text-[32px] font-[600]">Users</h1>
                 </div>
                 <div className="w-[300px] h-[60px] border-[2px] border-gray-300 rounded flex items-center p-[20px] gap-[50px] my-[35px]">
                     <input type="text" className="outline-none placeholder:text-xl w-full" placeholder="Search..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />

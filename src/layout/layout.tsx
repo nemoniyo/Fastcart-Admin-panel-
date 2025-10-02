@@ -23,12 +23,12 @@ const Layout = () => {
     }, []);
     return (
         <div className=''>
-            <ul>
-                <li>
-                    <Link to={"/"}></Link>
-                </li>
-                <Outlet />
-            </ul>
+                <ul>
+                    <li>
+                        <Link to={"/"}></Link>
+                    </li>
+                    <Outlet />
+                </ul>
         </div>
     )
 }

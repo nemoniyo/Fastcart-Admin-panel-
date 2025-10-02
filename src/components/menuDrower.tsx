@@ -33,7 +33,7 @@ const MenuDrower = () => {
                     }
                 >
                     <Logs />
-                    Orders
+                    Users
                 </NavLink>
 
                 <NavLink

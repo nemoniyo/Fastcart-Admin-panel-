@@ -15,7 +15,7 @@ export const todo = createApi({
     }),
     endpoints: (build) => ({
         getData: build.query({
-            query: () => `UserProfile/get-user-profiles?PageNumber=1&PageSize=50`,
+            query: () => `UserProfile/get-user-profiles?PageNumber=1&PageSize=1000`,
             providesTags: ["todo"]
         }),
         getProducts: build.query({
@@ -29,6 +29,25 @@ export const todo = createApi({
         getBrands: build.query({
             query: () => `Brand/get-brands`,
             providesTags: ["todo"]
+        }),
+        getSubcategoryes: build.query({
+            query: () => `SubCategory/get-sub-category`,
+            providesTags: ["todo"]
+        }),
+        deleteSubcategoryes: build.mutation({
+            query: (id) => ({
+                url: `SubCategory/delete-sub-category?id=${id}`,
+                method: "DELETE"
+            }),
+            invalidatesTags: ["todo"]
+        }),
+        editSubcategoryes: build.mutation({
+            query: (obj) => ({
+                url: `SubCategory/update-sub-category`,
+                method: 'PUT',
+                body: obj,
+            }),
+            invalidatesTags: ["todo"],
         }),
         deleteData: build.mutation({
             query: (id) => ({
@@ -91,4 +110,4 @@ export const todo = createApi({
     }),
 })
 
-export const { useGetDataQuery, useDeleteDataMutation, useGetProductsQuery, useDeleteProductMutation, useRoleUserMutation, useRoleDeleteMutation, useGetCategoryesQuery, useDeleteCategoryesMutation, useEditCategoryesMutation, useGetBrandsQuery, useDeleteBrandsMutation, useEditBrandsMutation } = todo;
+export const { useGetDataQuery, useDeleteDataMutation, useGetProductsQuery, useDeleteProductMutation, useRoleUserMutation, useRoleDeleteMutation, useGetCategoryesQuery, useDeleteCategoryesMutation, useEditCategoryesMutation, useGetBrandsQuery, useDeleteBrandsMutation, useEditBrandsMutation, useGetSubcategoryesQuery, useDeleteSubcategoryesMutation, useEditSubcategoryesMutation } = todo;

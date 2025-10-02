@@ -58,19 +58,20 @@ const Others = () => {
     return (<>
         <div>
             <Navbar />
-            <div className="flex">
-                <div>
-                    <MenuDrower />
-                </div>
+            <div className='flex'>
+                <MenuDrower />
                 <div className="p-[25px]">
-                    <div className="flex gap-[30px] text-[20px] font-[500]">
-                        <button className="rounded bg-[#DBEAFE] text-[#416BDF] p-[10px]">Categories</button>
-                        <Link to={"/others/brands"}>
-                            <button className="hover:rounded hover:bg-[#DBEAFE] hover:text-[#416BDF] transition-all duration-500 p-[10px]">Brands</button>
-                        </Link>
-                        <Link to={"/others/banners"}>
-                            <button className="hover:rounded hover:bg-[#DBEAFE] hover:text-[#416BDF] transition-all duration-500 p-[10px]">Banners</button>
-                        </Link>
+                    <div className="flex justify-between items-center">
+                        <div className="flex gap-[30px] text-[20px] font-[500]">
+                            <button className="rounded bg-[#DBEAFE] text-[#416BDF] p-[10px]">Categories</button>
+                            <Link to={"/others/brands"}>
+                                <button className="hover:rounded hover:bg-[#DBEAFE] hover:text-[#416BDF] transition-all duration-500 p-[10px]">Brands</button>
+                            </Link>
+                            <Link to={"/others/banners"}>
+                                <button className="hover:rounded hover:bg-[#DBEAFE] hover:text-[#416BDF] transition-all duration-500 p-[10px]">Subcategorys</button>
+                            </Link>
+                        </div>
+                        <button className="w-[160px] h-[55px] bg-[#2563EB] hover:opacity-70 transition-all duration-500 text-[whitesmoke] text-[18px] font-[600] rounded-[4px] hover:rounded-[15px] absolute left-[1480px]">+  Add category</button>
                     </div>
                     <div className="w-[300px] h-[60px] border-[2px] border-gray-300 rounded flex items-center p-[20px] gap-[50px] my-[35px]">
                         <input type="text" className="outline-none placeholder:text-xl w-full" placeholder="Search..." value={search} onChange={(e) => setSearch(e.target.value)} />

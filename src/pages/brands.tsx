@@ -65,7 +65,7 @@ const Brands = () => {
                         </Link>
                         <button className="rounded bg-[#DBEAFE] text-[#416BDF] p-[10px]">Brands</button>
                         <Link to={"/others/banners"}>
-                            <button className="hover:rounded hover:bg-[#DBEAFE] hover:text-[#416BDF] transition-all duration-500 p-[10px]">Banners</button>
+                            <button className="hover:rounded hover:bg-[#DBEAFE] hover:text-[#416BDF] transition-all duration-500 p-[10px]">Subcategorys</button>
                         </Link>
                     </div>
                     <div className="w-[300px] h-[60px] border-[2px] border-gray-300 rounded flex items-center p-[20px] gap-[50px] my-[35px]">
