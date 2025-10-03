@@ -7,6 +7,8 @@ import Products from './pages/products';
 import Others from './pages/others';
 import Brands from './pages/brands';
 import Banners from './pages/banners';
+import AddProduct from './pages/addProduct';
+import EditProduct from './pages/editProduct';
 
 export default function App() {
   const router = createBrowserRouter([
@@ -29,6 +31,14 @@ export default function App() {
         {
           path: "/products",
           element: <Products />
+        },
+        {
+          path: "/products/addproduct",
+          element: <AddProduct />
+        },
+        {
+          path: "/products/editProduct",
+          element: <EditProduct />
         },
         {
           path: "/others",

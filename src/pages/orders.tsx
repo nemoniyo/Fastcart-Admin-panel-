@@ -1,4 +1,4 @@
-import { Edit, Search, Trash } from "lucide-react";
+import { Search, Trash } from "lucide-react";
 import MenuDrower from "../components/menuDrower";
 import Navbar from "../components/navbar";
 import { useState } from "react";
