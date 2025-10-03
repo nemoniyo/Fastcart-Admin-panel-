@@ -5,13 +5,15 @@ import { useEffect, useState } from "react"
 import { useDeleteProductMutation, useGetProductsQuery } from "../reducers/todoslice"
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Tooltip } from "antd";
+import { Tooltip, Pagination } from "antd";
 import { Link } from "react-router-dom"
 
 const Products = () => {
     const { data, error, isLoading } = useGetProductsQuery();
     const [deleteProduct, { isLoading: deleting, isSuccess, isError }] = useDeleteProductMutation();
     const [searchTerm, setSearchTerm] = useState("");
+    const [currentPage, setCurrentPage] = useState(1);
+    const pageSize = 10;
 
     useEffect(() => {
         if (isSuccess) {
@@ -25,6 +27,9 @@ const Products = () => {
     const filteredProducts = data?.data?.products?.filter((product: any) =>
         product.productName.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
+    const startIndex = (currentPage - 1) * pageSize;
+    const paginatedProducts = filteredProducts?.slice(startIndex, startIndex + pageSize);
 
     return (<>
         <div>
@@ -44,8 +49,8 @@ const Products = () => {
                             <Search />
                         </div>
                     </div>
-                    <div className="w-[1620px] overflow-scroll h-[900px] mt-[100px]">
-                        {filteredProducts?.map((element: any) =>
+                    <div className="w-[1620px]  mt-[100px]">
+                        {paginatedProducts?.map((element: any) =>
                             <div key={element.id} className="flex justify-between border-b-[2px] border-gray-300 p-[20px] text-start">
                                 <img src={`http://37.27.29.18:8002/images/${element.image}`} alt="Product image" className="w-[40px] h-[40px]" />
                                 <p className="w-[15%]">{element.productName}</p>
@@ -72,6 +77,14 @@ const Products = () => {
                     {filteredProducts?.length === 0 && (
                         <p className="text-gray-500 text-xl">Ничего не найдено</p>
                     )}
+                    <div className="mt-5 flex justify-center">
+                        <Pagination
+                            current={currentPage}
+                            pageSize={pageSize}
+                            total={filteredProducts?.length || 0}
+                            onChange={(page) => setCurrentPage(page)}
+                        />
+                    </div>
                 </div>
             </div>
         </div>
@@ -79,4 +92,4 @@ const Products = () => {
     </>)
 }
 
-export default Products
+export default Products  

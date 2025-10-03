@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useGetDataQuery, useDeleteDataMutation, useRoleUserMutation, useRoleDeleteMutation } from "../reducers/todoslice";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Tooltip } from "antd";
+import { Tooltip, Pagination } from "antd";
 
 const Orders = () => {
     const { data } = useGetDataQuery();
@@ -13,6 +13,8 @@ const Orders = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [roleUser] = useRoleUserMutation();
     const [roleDelete] = useRoleDeleteMutation();
+    const [currentPage, setCurrentPage] = useState(1);
+    const pageSize = 10;
 
     const handleDelete = async (id) => {
         try {
@@ -40,7 +42,8 @@ const Orders = () => {
         }
     }
 
-
+    const startIndex = (currentPage - 1) * pageSize;
+    const paginatedUsers = filteredUsers?.slice(startIndex, startIndex + pageSize);
 
     return (<>
         <Navbar />
@@ -58,8 +61,8 @@ const Orders = () => {
                         <Search />
                     </div>
                 </div>
-                <div className="w-[1620px] overflow-scroll h-[900px]">
-                    {filteredUsers?.map((user: any) => (
+                <div className="w-[1620px]  h-[750px]">
+                    {paginatedUsers?.map((user: any) => (
                         <div key={user.userId} className="flex justify-between border-b-[2px] border-gray-300 p-[20px] text-start">
                             <h1 className="w-[20%]">{user.userName}</h1>
                             <p className="w-[20%]">{user.userId.slice(0, 5)}</p>
@@ -87,6 +90,14 @@ const Orders = () => {
                             </div>
                         </div>
                     ))}
+                </div>
+                <div className="mt-1 flex justify-center">
+                    <Pagination
+                        current={currentPage}
+                        pageSize={pageSize}
+                        total={filteredUsers?.length || 0}
+                        onChange={(page) => setCurrentPage(page)}
+                    />
                 </div>
             </div>
         </div>

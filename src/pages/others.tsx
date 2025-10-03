@@ -6,7 +6,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Tooltip } from "antd";
+import { Tooltip, Pagination } from "antd";
 
 const Others = () => {
     const { data } = useGetCategoryesQuery();
@@ -26,6 +26,8 @@ const Others = () => {
     const [previewAdd, setPreviewAdd] = useState<string | null>(null);
 
     const [search, setSearch] = useState("");
+    const [currentPage, setCurrentPage] = useState(1);
+    const pageSize = 8;
 
     function showEdit(e: any) {
         setIdx(e.id);
@@ -63,7 +65,6 @@ const Others = () => {
         }
     }
 
-    // add category
     async function handleAdd(e: any) {
         e.preventDefault();
         let formData = new FormData();
@@ -87,6 +88,9 @@ const Others = () => {
     const filteredData = data?.data?.filter((item: any) =>
         item.categoryName.toLowerCase().includes(search.toLowerCase())
     );
+
+    const startIndex = (currentPage - 1) * pageSize;
+    const paginatedData = filteredData?.slice(startIndex, startIndex + pageSize);
 
     return (<>
         <div>
@@ -120,7 +124,7 @@ const Others = () => {
                     </div>
 
                     <div className="flex gap-[50px] flex-wrap">
-                        {filteredData?.map((element: any) => {
+                        {paginatedData?.map((element: any) => {
                             return (
                                 <div key={element.id} className="w-[250px] h-[180px] border-[2px] border-[whitesmoke] shadow-lg rounded p-[15px] relative">
                                     <div>
@@ -142,67 +146,80 @@ const Others = () => {
                                 </div>
                             )
                         })}
-
-                        {editCategoryesModal && (
-                            <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex justify-center items-center z-50">
-                                <form onSubmit={handleEdit} className="bg-white p-6 rounded-lg w-full max-w-md shadow-md space-y-4">
-                                    {previewEdit && (
-                                        <img src={previewEdit} alt="preview" className="w-[100px] h-[100px] object-cover mx-auto" />
-                                    )}
-                                    <input
-                                        type="file"
-                                        name="categoryImage"
-                                        onChange={(e) => {
-                                            const file = e.target.files ? e.target.files[0] : null;
-                                            setEditImage(file);
-                                            if (file) setPreviewEdit(URL.createObjectURL(file));
-                                        }}
-                                    />
-                                    <input
-                                        type="text"
-                                        name="categoryName"
-                                        value={editName}
-                                        onChange={(e) => setEditName(e.target.value)}
-                                        className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                                    />
-                                    <div className="flex gap-2 pt-2">
-                                        <button type="button" className="w-1/2 bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 rounded" onClick={() => setEditCategoryesModal(false)}>Cancel</button>
-                                        <button type="submit" className="w-1/2 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded">Save</button>
-                                    </div>
-                                </form>
-                            </div>
-                        )}
-
-                        {addCategoryesModal && (
-                            <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex justify-center items-center z-50">
-                                <form onSubmit={handleAdd} className="bg-white p-6 rounded-lg w-full max-w-md shadow-md space-y-4">
-                                    {previewAdd && (
-                                        <img src={previewAdd} alt="preview" className="w-[100px] h-[100px] object-cover mx-auto" />
-                                    )}
-                                    <input
-                                        type="file"
-                                        name="categoryImage"
-                                        onChange={(e) => {
-                                            const file = e.target.files ? e.target.files[0] : null;
-                                            setAddImage(file);
-                                            if (file) setPreviewAdd(URL.createObjectURL(file));
-                                        }}
-                                    />
-                                    <input
-                                        type="text"
-                                        name="categoryName"
-                                        value={addName}
-                                        onChange={(e) => setAddName(e.target.value)}
-                                        className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                                    />
-                                    <div className="flex gap-2 pt-2">
-                                        <button type="button" className="w-1/2 bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 rounded" onClick={() => setAddCategoryesModal(false)}>Cancel</button>
-                                        <button type="submit" className="w-1/2 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded">Add</button>
-                                    </div>
-                                </form>
-                            </div>
-                        )}
                     </div>
+
+                    {filteredData?.length === 0 && (
+                        <p className="text-gray-500 text-xl">Ничего не найдено</p>
+                    )}
+
+                    <div className="mt-5 flex justify-center">
+                        <Pagination
+                            current={currentPage}
+                            pageSize={pageSize}
+                            total={filteredData?.length || 0}
+                            onChange={(page) => setCurrentPage(page)}
+                        />
+                    </div>
+
+                    {editCategoryesModal && (
+                        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex justify-center items-center z-50">
+                            <form onSubmit={handleEdit} className="bg-white p-6 rounded-lg w-full max-w-md shadow-md space-y-4">
+                                {previewEdit && (
+                                    <img src={previewEdit} alt="preview" className="w-[100px] h-[100px] object-cover mx-auto" />
+                                )}
+                                <input
+                                    type="file"
+                                    name="categoryImage"
+                                    onChange={(e) => {
+                                        const file = e.target.files ? e.target.files[0] : null;
+                                        setEditImage(file);
+                                        if (file) setPreviewEdit(URL.createObjectURL(file));
+                                    }}
+                                />
+                                <input
+                                    type="text"
+                                    name="categoryName"
+                                    value={editName}
+                                    onChange={(e) => setEditName(e.target.value)}
+                                    className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                />
+                                <div className="flex gap-2 pt-2">
+                                    <button type="button" className="w-1/2 bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 rounded" onClick={() => setEditCategoryesModal(false)}>Cancel</button>
+                                    <button type="submit" className="w-1/2 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    )}
+
+                    {addCategoryesModal && (
+                        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex justify-center items-center z-50">
+                            <form onSubmit={handleAdd} className="bg-white p-6 rounded-lg w-full max-w-md shadow-md space-y-4">
+                                {previewAdd && (
+                                    <img src={previewAdd} alt="preview" className="w-[100px] h-[100px] object-cover mx-auto" />
+                                )}
+                                <input
+                                    type="file"
+                                    name="categoryImage"
+                                    onChange={(e) => {
+                                        const file = e.target.files ? e.target.files[0] : null;
+                                        setAddImage(file);
+                                        if (file) setPreviewAdd(URL.createObjectURL(file));
+                                    }}
+                                />
+                                <input
+                                    type="text"
+                                    name="categoryName"
+                                    value={addName}
+                                    onChange={(e) => setAddName(e.target.value)}
+                                    className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                />
+                                <div className="flex gap-2 pt-2">
+                                    <button type="button" className="w-1/2 bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 rounded" onClick={() => setAddCategoryesModal(false)}>Cancel</button>
+                                    <button type="submit" className="w-1/2 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded">Add</button>
+                                </div>
+                            </form>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

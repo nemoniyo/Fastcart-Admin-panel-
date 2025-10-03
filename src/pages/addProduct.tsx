@@ -26,11 +26,11 @@ const AddProduct = () => {
     const [selectedColor, setSelectedColor] = useState<string | null>(null)
     const [tags, setTags] = useState(["T-Shirt", "Men Clothes", "Summer Collection"])
     const [tagInput, setTagInput] = useState("")
-    const [images, setImages] = useState([
-        { id: 1, name: "Healthcare_Ethology.png" },
-        { id: 2, name: "Healthcare_Ethology.png" },
-        { id: 3, name: "Healthcare_Ethology.png" },
-    ])
+    // const [images, setImages] = useState([
+    //     { id: 1, name: "Healthcare_Ethology.png" },
+    //     { id: 2, name: "Healthcare_Ethology.png" },
+    //     { id: 3, name: "Healthcare_Ethology.png" },
+    // ])
     const [sizes, setSizes] = useState(["S", "M", "L", "XL"])
     const [weights, setWeights] = useState(["10", "20", "30", "40"])
 
